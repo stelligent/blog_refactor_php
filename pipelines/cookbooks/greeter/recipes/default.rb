@@ -43,3 +43,14 @@ template "#{node[:greeter][:docroot]}/index.php" do
   group 'www-data'
   mode '755'
 end
+
+script 'install cfn-init' do
+  interpreter "bash"
+  code <<-EOH
+    apt-get -y install python-setuptools
+    wget -P /root https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-latest.tar.gz
+    mkdir -p /root/aws-cfn-bootstrap-latest
+    tar xvfz /root/aws-cfn-bootstrap-latest.tar.gz --strip-components=1 -C /root/aws-cfn-bootstrap-latest
+    easy_install /root/aws-cfn-bootstrap-latest/
+  EOH
+end
