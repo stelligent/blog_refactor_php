@@ -39,7 +39,7 @@ if [ ":$stack_exists" == ":" ]; then
     --disable-rollback \
     --region ${aws_region} \
     --stack-name ${rds_stack_name} \
-    --template-url https://s3.amazonaws.com/stelligent-blog/chefjson/templates/mysql-rds.template.json \
+    --template-url https://s3.amazonaws.com/blog-refactor/cfntemplates/mysql-rds.template.json \
     --capabilities CAPABILITY_IAM \
     --tags \
       Key="application",Value=${app_name} \
@@ -77,13 +77,13 @@ echo {} | jq ".run_list = [\"greeter\"] | .greeter = \
   password: \"$rds_password\", \
   docroot: \"/var/www/${app_name}\"}" > ${working_directory}/chef.json
 
-aws s3 cp ${working_directory}/chef.json s3://stelligent-blog/chefjson/jsons/$chef_json_key
+aws s3 cp ${working_directory}/chef.json s3://blog-refactor/chefjson/$chef_json_key
 
 aws cloudformation create-stack \
   --disable-rollback \
   --region ${aws_region} \
   --stack-name ${asg_stack_name} \
-  --template-url https://s3.amazonaws.com/stelligent-blog/chefjson/templates/deploy-app.template.json \
+  --template-url https://s3.amazonaws.com/blog-refactor/cfntemplates/deploy-app.template.json \
   --capabilities CAPABILITY_IAM \
   --tags \
     Key="application",Value=${app_name} \
