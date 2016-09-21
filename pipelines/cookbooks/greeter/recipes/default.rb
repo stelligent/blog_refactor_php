@@ -30,7 +30,7 @@ cookbook_file "/tmp/db.seed" do
 end
 
 execute "seed database" do
-  command "mysql -u #{node[:greeter][:username]} -p#{node[:greeter][:password]} -h #{node[:greeter][:db_url]} #{node[:greeter][:db_name]} < /tmp/db.seed"
+  command "mysql -u #{node[:greeter][:username]} -p#{node[:greeter][:password]} -h #{node[:greeter][:db_url]} < /tmp/db.seed"
 end
 
 execute "mkdir #{node[:greeter][:docroot]}" do
@@ -42,4 +42,8 @@ template "#{node[:greeter][:docroot]}/index.php" do
   owner 'www-data'
   group 'www-data'
   mode '755'
+end
+
+service 'apache2' do
+  action :restart
 end
