@@ -29,8 +29,8 @@ module Build
         }
         Aws::S3::Client.new(region: 'us-east-1').put_object({
           body: chef_json.to_json,
-          bucket: "stelligent-blog",
-          key: "chefjson/jsons/#{params[:chef_json_key]}"
+          bucket: "blog_refactor",
+          key: "chefjson/#{params[:chef_json_key]}"
         })
       end
 
