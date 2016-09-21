@@ -1,0 +1,29 @@
+require 'yaml'
+require 'blog_refactor_gem'
+require_relative './lib/extended_static_analysis'
+require_relative './lib/create_rds'
+
+
+# export app_name=NodeJSApp
+# export repository_url=https://github.com/stelligent/blog_refactor_nodejs
+# export repository_branch=master
+# export aws_region="us-east-1"
+# export aws_vpc_id="vpc-857a3ee2"
+# export aws_subnet_ids="subnet-c5a76a8c,subnet-3b233a06"
+# export aws_azs="us-east-1c,us-east-1b"
+# export aws_keypair="dugas-labs"
+
+# export app_name=greeter
+# export repository_url=https://github.com/stelligent/blog_refactor_php
+# export repository_branch=phase1
+# export aws_region="us-east-1"
+# export aws_vpc_id="vpc-857a3ee2"
+# export aws_subnet_ids="subnet-c5a76a8c,subnet-3b233a06"
+# export aws_azs="us-east-1c,us-east-1b"
+# export aws_keypair="matt-labs"
+
+meta_path = File.join(File.expand_path(File.dirname(__FILE__)), 'pipeline-meta.yml')
+@meta = YAML.load(IO.read(meta_path))
+@store_path = File.join(File.expand_path(File.dirname(__FILE__)), 'store.json')
+
+require 'blog_refactor_rake'

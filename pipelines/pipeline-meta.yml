@@ -1,0 +1,33 @@
+---
+:repository_url: https://github.com/stelligent/blog_refactor_nodejs
+:name: greeter
+:branch: phase1
+:language: php
+:language_version: 5.4.1
+:log_level: warn
+:pipeline: build
+:steps:
+- :name: scm_polling
+  :description: Triggered by source code commits, pulls code from the VCS
+  :phase: commit
+  :depends:
+- :name: static_analysis
+  :description: Performs default static code analysis plus
+  :phase: commit
+  :depends:
+- :name: unit_testing
+  :description: Performs application unit tests
+  :phase: commit
+  :depends:
+- :name: create_rds
+  :description: Performs application unit tests
+  :phase: acceptance
+  :depends:
+- :name: environment_creation
+  :description: Performs application unit tests
+  :phase: acceptance
+  :depends:
+- :name: automated_testing
+  :description: Performs application unit tests
+  :phase: acceptance
+  :depends:
