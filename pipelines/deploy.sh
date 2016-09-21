@@ -4,7 +4,7 @@
 
 app_name=greeter
 repository_url=https://github.com/stelligent/blog_refactor_php.git
-repository_branch=master # change to phase1 when ready
+repository_branch=phase1
 aws_region=${AWS_REGION:-us-east-1}
 aws_vpc=${AWS_VPC_ID:-vpc-857a3ee2}
 aws_subnets=${AWS_SUBNET_IDS:-subnet-c5a76a8c,subnet-3b233a06}
