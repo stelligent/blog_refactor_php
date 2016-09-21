@@ -11,7 +11,7 @@ module Build
         params[:rds_username] = ENV['rds_username'] || 'example123'
         params[:rds_stack_name] = "rds-#{params[:app_name]}"
 
-        stack_info = get_stack(region: params[:aws_region], name: params[:rds_stack_name])
+        stack_info = BlogRefactorGem::Utils::Cfn.get_stack(region: params[:aws_region], name: params[:rds_stack_name])
         stack_info = create_rds(params: params) if stack_info.nil?
 
         params[:rds_endpoint] = stack_info.outputs.select { |output| output[:output_key] == "DBEndpoint" }[0][:output_value]
